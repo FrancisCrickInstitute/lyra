@@ -10,7 +10,6 @@ authors = [
 ]
 urls = { "Homepage" = "https://github.com/FrancisCrickInstitute/lyra" }
 dependencies = [
-    "apm-cli==0.7.*",
 ]
 
 [build-system]
