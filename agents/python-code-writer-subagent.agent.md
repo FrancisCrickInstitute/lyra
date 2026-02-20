@@ -1,5 +1,5 @@
 ---
-name: code-writer-subagent
+name: python-code-writer-subagent
 description: Implementation Developer - Writes code to make failing tests pass
 model: Claude Sonnet 4.6 (copilot)
 tools: [execute, read, edit, search, todo]
