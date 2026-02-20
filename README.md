@@ -23,6 +23,40 @@ just dev
 
 This creates a virtual environment, installs all dependencies, and drops you into an activated shell.
 
+## Using as an APM Dependency
+
+Install individual files directly into another project:
+
+```bash
+apm install FrancisCrickInstitute/lyra/instructions/python.instructions.md
+```
+
+Or declare in your project's `apm.yml`:
+
+```yaml
+dependencies:
+  apm:
+    - FrancisCrickInstitute/lyra/instructions/python.instructions.md
+```
+
+### Troubleshooting: "not accessible or doesn't exist"
+
+APM uses the GitHub API, which rate-limits unauthenticated requests to **60/hour**. If you hit this limit, installs will fail with "not accessible or doesn't exist" even though the file is public.
+
+**Fix:** set `GITHUB_APM_PAT` using your existing `gh` CLI token:
+
+```bash
+export GITHUB_APM_PAT=$(gh auth token)
+```
+
+To make this permanent, add it to your shell profile (`~/.zshrc` or `~/.bashrc`):
+
+```bash
+echo 'export GITHUB_APM_PAT=$(gh auth token)' >> ~/.zshrc
+```
+
+This raises the rate limit to 5,000 requests/hour.
+
 ## Requirements
 
 - Python >= 3.13
