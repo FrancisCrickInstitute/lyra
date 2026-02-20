@@ -31,7 +31,7 @@ Each subagent contains its own detailed responsibilities and instructions. You o
 **Gate Condition**: User must EXPLICITLY APPROVE the design before you proceed to Stage 2.
 
 **Your Actions**:
-1. Invoke `runSubagent` with agent name `planner-subagent`
+1. Invoke `runSubagent` with agent name `python-planner-subagent`
 2. Provide the user's task/requirements
 3. Present the Planner's proposal to the user
 4. **Wait for explicit approval** – Do not proceed until user confirms
@@ -47,7 +47,7 @@ Each subagent contains its own detailed responsibilities and instructions. You o
 **Gate Condition**: All tests must be written, organized, and **FAILING** (red phase of TDD expected).
 
 **Your Actions**:
-1. Invoke `runSubagent` with agent name `test-writer-subagent`
+1. Invoke `runSubagent` with agent name `python-test-writer-subagent`
 2. Provide approved design and task context
 3. Verify test files are created in `tests/test_<module>.py`
 4. Run `pytest` to confirm tests fail as expected
@@ -58,12 +58,12 @@ Each subagent contains its own detailed responsibilities and instructions. You o
 
 ## Stage 3: Code Writer Agent
 
-**Task**:Invoke `runSubagent` with agent name `code-writer-subagent` to implement code that makes failing tests PASS.
+**Task**:Invoke `runSubagent` with agent name `python-code-writer-subagent` to implement code that makes failing tests PASS.
 
 **Gate Condition**: ALL tests PASS and **100% coverage confirmed**.
 
 **Your Actions**:
-1. Invoke `runSubagent` with agent name `code-writer-subagent`
+1. Invoke `runSubagent` with agent name `python-code-writer-subagent`
 2. Provide test file paths and task context
 3. After implementation, run: `pytest`
 4. Run: `pytest --cov=polaris` to verify 100% coverage
@@ -76,12 +76,12 @@ Each subagent contains its own detailed responsibilities and instructions. You o
 
 ## Stage 4: Formatter Agent
 
-**Task**: Invoke `runSubagent` with agent name `formatter-subagent` to run code quality tools.
+**Task**: Invoke `runSubagent` with agent name `python-formatter-subagent` to run code quality tools.
 
 **Gate Condition**: All formatting tools pass (`black`, `isort`, `ruff`) and tests still pass.
 
 **Your Actions**:
-1. Invoke `runSubagent` with agent name `formatter-subagent`
+1. Invoke `runSubagent` with agent name `python-formatter-subagent`
 2. Confirm the following commands run without errors:
    - `black polaris/ tests/`
    - `isort polaris/ tests/`
@@ -94,12 +94,12 @@ Each subagent contains its own detailed responsibilities and instructions. You o
 
 ## Stage 5: Code Reviewer Agent
 
-**Task**: Invoke `runSubagent` with agent name `code-reviewer-subagent` to review implementation against guidelines and patterns.
+**Task**: Invoke `runSubagent` with agent name `python-code-reviewer-subagent` to review implementation against guidelines and patterns.
 
 **Gate Condition**: Code quality approved with no blockers.
 
 **Your Actions**:
-1. Invoke `runSubagent` with agent name `code-reviewer-subagent`
+1. Invoke `runSubagent` with agent name `python-code-reviewer-subagent`
 2. Provide implementation files (only files modified in Stage 3) and context
 3. If reviewer identifies issues:
    - Return to Code Writer Agent for fixes
@@ -161,8 +161,3 @@ Provide a clear summary including:
 3. **User approval required** – Stage 1 gate is mandatory
 4. **100% coverage required** – Stage 3 gate will not pass without it
 5. **TDD-first** – Tests must be written before implementation code
-
-
-
-
-
