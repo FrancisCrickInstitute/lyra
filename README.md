@@ -34,9 +34,22 @@ apm install FrancisCrickInstitute/lyra/instructions/python.instructions.md
 Or declare in your project's `apm.yml`:
 
 ```yaml
+name: my-project
+version: 0.0.0
 dependencies:
   apm:
-    - FrancisCrickInstitute/lyra/instructions/python.instructions.md
+  # Agents
+  - FrancisCrickInstitute/lyra/agents/docs-updater-subagent.agent.md
+  - FrancisCrickInstitute/lyra/agents/python-conductor.agent.md
+  - FrancisCrickInstitute/lyra/agents/python-code-reviewer-subagent.agent.md
+  - FrancisCrickInstitute/lyra/agents/python-test-writer-subagent.agent.md
+  - FrancisCrickInstitute/lyra/agents/python-planner-subagent.agent.md
+  - FrancisCrickInstitute/lyra/agents/python-formatter-subagent.agent.md
+  - FrancisCrickInstitute/lyra/agents/python-code-writer-subagent.agent.md
+  # Instructions
+  - FrancisCrickInstitute/lyra/instructions/python.instructions.md
+  # Skills
+  - FrancisCrickInstitute/lyra/skills/nextflow-diagram-creation/SKILL.md
 ```
 
 ### Troubleshooting: "not accessible or doesn't exist"
