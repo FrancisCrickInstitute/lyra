@@ -1,0 +1,111 @@
+[project]
+name="lyra"
+version = "0.1.0"
+requires-python = ">=3.13"
+readme = { file = "README.md", content-type = "text/markdown" }
+license = { file = "LICENSE" }
+keywords = []
+authors = [
+    { name = "Chris Cheshire", email = "chris.cheshire@crick.ac.uk" }
+]
+urls = { "Homepage" = "https://github.com/FrancisCrickInstitute/lyra" }
+dependencies = [
+    "apm-cli==0.7.*",
+]
+
+[build-system]
+requires = ["setuptools", "wheel"]
+
+[dependency-groups]
+dev = [
+  {include-group = "lint"},
+  {include-group = "test"}
+]
+test = [
+    "pytest",
+    "pytest-cov",
+    "pytest-sugar",
+    "pytest-profiling",
+    "pytest-benchmark",
+    "assertpy",
+    "psycopg2"
+]
+lint = [
+    "black",
+    "isort",
+    "pylint",
+    "ruff",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+norecursedirs = [
+    ".*",
+    "*.egg",
+    ".github",
+    "__pycache__",
+    "build",
+    "dist",
+    "prof",
+    "data",
+    "docs",
+]
+
+[tool.black]
+line-length = 150
+target-version = ["py311"]
+exclude = '''
+    polaris/__main__.py
+    | .venv
+    |  build
+    |  prototype
+'''
+
+[tool.isort]
+skip = [
+    "prototype",
+    "build",
+    ".venv",
+]
+profile = "black"
+atomic = true
+indent = 4
+line_length = 150
+lines_after_imports = 2
+include_trailing_comma = true
+
+[tool.pylint.FORMAT]
+max-line-length = 150
+
+[tool.pylint."MESSAGES CONTROL"]
+disable = [
+    "E0401", # import-errorß
+    "R0913", # too-many-arguments
+    "R0903", # too-few-public-methods
+    "R0904", # too-many-public-methods
+    "R0914", # too-many-locals
+    "R0912", # too-many-branches
+    "R0801", # duplicate-code
+    "R0902", # too-many-instance-attributes
+    "R0917", # too-many-positional-arguments
+    "R0915", # too-many-statements
+    "R1710", # inconsistent-return-statements
+    "W1203", # logging-fstring-interpolation
+    "W0102", # dangerous-default-value,
+    "W1514", # unspecified-encoding
+    "C0302", # too-many-lines
+]
+
+[tool.pylint.MASTER]
+ignore-paths = [
+    "prototype",
+    "build",
+]
+
+[tool.ruff]
+target-version = "py313"
+line-length = 150
+exclude = [
+    "prototype",
+    "build",
+]
