@@ -53,9 +53,8 @@ norecursedirs = [
 
 [tool.black]
 line-length = 150
-target-version = ["py311"]
+target-version = ["py313"]
 exclude = '''
-    polaris/__main__.py
     | .venv
     |  build
     |  prototype
