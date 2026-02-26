@@ -1,5 +1,6 @@
 ---
 description: Documentation & Communication - Verifies docs and communication are complete
+name: docs-updater-subagent
 model: Claude Sonnet 4.6 (copilot)
 tools: [read, edit, search, web, todo]
 user-invokable: false

@@ -7,21 +7,7 @@ agents:
   - impliment-subagent
   - code-review-subagent
   - seqera-ai-subagent
-dependencies:
-  apm:
-    # Subagents - automatically installed
-    - FrancisCrickInstitute/lyra/agents/nextflow/nextflow-subagents/planning-subagent.agent.md
-    - FrancisCrickInstitute/lyra/agents/nextflow/nextflow-subagents/impliment-subagent.agent.md
-    - FrancisCrickInstitute/lyra/agents/nextflow/nextflow-subagents/code-review-subagent.agent.md
-    - FrancisCrickInstitute/lyra/agents/nextflow/nextflow-subagents/seqera-ai-subagent.agent.md
-    # Instructions - coding standards
-    - FrancisCrickInstitute/lyra/instructions/nextflow.instructions.md
-    - FrancisCrickInstitute/lyra/instructions/python.instructions.md
-    # Skills - reusable workflows
-    - FrancisCrickInstitute/lyra/skills/bioinformatic-tool-selection
-    - FrancisCrickInstitute/lyra/skills/nextflow-diagram-creation
-    - FrancisCrickInstitute/lyra/skills/nf-core-modules-subworkflows
-    - FrancisCrickInstitute/lyra/skills/pipeline-debugging
+
 ---
 You are a CONDUCTOR AGENT. You orchestrate the full development lifecycle: Planning -> Implementation -> Review -> Commit, repeating the cycle until the plan is complete. Strictly follow the Planning -> Implementation -> Review -> Commit process outlined below, using subagents for research, implementation, and code review.
 

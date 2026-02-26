@@ -34,10 +34,20 @@ Install a conductor agent and all its dependencies:
 apm install FrancisCrickInstitute/lyra/agents/nextflow/conductor.agent.md
 
 # For Python projects
-apm install FrancisCrickInstitute/lyra/agents/python-conductor.agent.md
+apm install FrancisCrickInstitute/lyra/agents/python/python-conductor.agent.md
 ```
 
 APM automatically installs all transitive dependencies (subagents, instructions, and skills) declared in the agent's frontmatter.
+
+Or install a curated bundle as a single dependency path:
+
+```bash
+# Nextflow bundle (conductor + subagents/instructions/skills)
+apm install FrancisCrickInstitute/lyra/packages/nextflow
+
+# Python bundle (conductor + subagents/instructions)
+apm install FrancisCrickInstitute/lyra/packages/python
+```
 
 ### Project Configuration
 
@@ -48,17 +58,29 @@ name: my-project
 version: 0.0.0
 dependencies:
   apm:
+    # Nextflow bundle (single dependency)
+    - FrancisCrickInstitute/lyra/packages/nextflow
+
+    # Python bundle (single dependency)
+    - FrancisCrickInstitute/lyra/packages/python
+
     # Nextflow Conductor (includes all subagents, instructions, and skills)
     - FrancisCrickInstitute/lyra/agents/nextflow/conductor.agent.md
     
     # Or Python Conductor (includes all subagents and instructions)
-    # - FrancisCrickInstitute/lyra/agents/python-conductor.agent.md
+    # - FrancisCrickInstitute/lyra/agents/python/python-conductor.agent.md
 ```
 
 Then run:
 ```bash
 apm install
 ```
+
+### Notes on Paths
+
+- APM supports installing `owner/repo/path` packages (subdirectory/virtual packages).
+- APM does not support wildcard folder installs (for example, "install all files under this folder" via glob).
+- If you need a fixed set of primitives from this repo, prefer bundle paths like `FrancisCrickInstitute/lyra/packages/nextflow` or `FrancisCrickInstitute/lyra/packages/python`.
 
 ### Install Individual Components
 
@@ -73,7 +95,7 @@ apm install FrancisCrickInstitute/lyra/skills/nextflow-diagram-creation
 
 # Specific subagent
 apm install FrancisCrickInstitute/lyra/agents/nextflow/nextflow-subagents/planning-subagent.agent.md
-apm install FrancisCrickInstitute/lyra/agents/python-planner-subagent.agent.md
+apm install FrancisCrickInstitute/lyra/agents/python/python-subagents/python-planner-subagent.agent.md
 ```
 
 ### Troubleshooting: "not accessible or doesn't exist"

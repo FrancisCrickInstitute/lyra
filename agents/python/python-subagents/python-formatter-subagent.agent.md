@@ -1,5 +1,6 @@
 ---
 description: Code Style & Linting - Runs automated formatting and linting tools
+name: python-formatter-subagent
 model: Claude Sonnet 4.6 (copilot)
 tools: [execute, read]
 user-invokable: false
