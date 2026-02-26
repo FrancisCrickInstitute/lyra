@@ -37,16 +37,17 @@ apm install FrancisCrickInstitute/lyra/agents/nextflow/conductor.agent.md
 apm install FrancisCrickInstitute/lyra/agents/python/python-conductor.agent.md
 ```
 
-APM automatically installs all transitive dependencies (subagents, instructions, and skills) declared in the agent's frontmatter.
 
 Or install a curated bundle as a single dependency path:
 
 ```bash
-# Nextflow bundle (conductor + subagents/instructions/skills)
+# Nextflow bundle (conductor + subagents/skills)
 apm install FrancisCrickInstitute/lyra/packages/nextflow
+apm install
 
-# Python bundle (conductor + subagents/instructions)
+# Python bundle (conductor + subagents)
 apm install FrancisCrickInstitute/lyra/packages/python
+apm install
 ```
 
 ### Project Configuration
@@ -58,17 +59,9 @@ name: my-project
 version: 0.0.0
 dependencies:
   apm:
-    # Nextflow bundle (single dependency)
-    - FrancisCrickInstitute/lyra/packages/nextflow
-
-    # Python bundle (single dependency)
-    - FrancisCrickInstitute/lyra/packages/python
-
-    # Nextflow Conductor (includes all subagents, instructions, and skills)
     - FrancisCrickInstitute/lyra/agents/nextflow/conductor.agent.md
-    
-    # Or Python Conductor (includes all subagents and instructions)
-    # - FrancisCrickInstitute/lyra/agents/python/python-conductor.agent.md
+    - FrancisCrickInstitute/lyra/agents/nextflow/nextflow-subagents/code-review-subagent.agent.md
+    - FrancisCrickInstitute/lyra/agents/nextflow/nextflow-subagents/planning-subagent.agent.md
 ```
 
 Then run:
@@ -87,9 +80,6 @@ apm install
 You can also install specific components:
 
 ```bash
-# Just an instruction file
-apm install FrancisCrickInstitute/lyra/instructions/python.instructions.md
-
 # Just a skill
 apm install FrancisCrickInstitute/lyra/skills/nextflow-diagram-creation
 
