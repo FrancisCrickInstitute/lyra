@@ -1,5 +1,4 @@
 ---
-name: python-conductor-agent
 description: This custom agent orchestrates complex workflows for GitHub Copilot, ensuring all tasks go through a structured planning and approval process before execution.
 model: Claude Sonnet 4.6 (copilot)
 tools: [execute, read, search, agent, todo, edit]

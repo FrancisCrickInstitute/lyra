@@ -1,5 +1,4 @@
 ---
-name: python-test-writer-subagent
 description: Test-Driven Development Lead - Writes comprehensive test cases before implementation
 model: Claude Sonnet 4.6 (copilot)
 tools: [execute, read, edit, search, todo]
