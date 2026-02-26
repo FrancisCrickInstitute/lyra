@@ -1,8 +1,10 @@
+---
 description: Guidelines & Quality Compliance - Reviews code against standards and patterns
 name: python-code-reviewer-subagent
 model: Claude Sonnet 4.6 (copilot)
 tools: [execute, read, search, web, todo]
 user-invokable: false
+---
 
 # Code Reviewer Subagent
 
