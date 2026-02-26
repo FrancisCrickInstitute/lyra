@@ -1,5 +1,6 @@
 ---
 description: This custom agent orchestrates complex workflows for GitHub Copilot, ensuring all tasks go through a structured planning and approval process before execution.
+name: python-conductor
 model: Claude Sonnet 4.6 (copilot)
 tools: [execute, read, search, agent, todo, edit]
 agents:
@@ -12,12 +13,12 @@ agents:
 dependencies:
   apm:
     # Subagents - automatically installed
-    - FrancisCrickInstitute/lyra/agents/python-planner-subagent.agent.md
-    - FrancisCrickInstitute/lyra/agents/python-test-writer-subagent.agent.md
-    - FrancisCrickInstitute/lyra/agents/python-code-writer-subagent.agent.md
-    - FrancisCrickInstitute/lyra/agents/python-formatter-subagent.agent.md
-    - FrancisCrickInstitute/lyra/agents/python-code-reviewer-subagent.agent.md
-    - FrancisCrickInstitute/lyra/agents/docs-updater-subagent.agent.md
+      - FrancisCrickInstitute/lyra/agents/python/python-subagents/python-planner-subagent.agent.md
+      - FrancisCrickInstitute/lyra/agents/python/python-subagents/python-test-writer-subagent.agent.md
+      - FrancisCrickInstitute/lyra/agents/python/python-subagents/python-code-writer-subagent.agent.md
+      - FrancisCrickInstitute/lyra/agents/python/python-subagents/python-formatter-subagent.agent.md
+      - FrancisCrickInstitute/lyra/agents/python/python-subagents/python-code-reviewer-subagent.agent.md
+      - FrancisCrickInstitute/lyra/agents/python/python-subagents/docs-updater-subagent.agent.md
     # Instructions - coding standards
     - FrancisCrickInstitute/lyra/instructions/python.instructions.md
 ---

@@ -1,0 +1,19 @@
+name: lyra-nextflow-bundle
+version: 1.0.0
+description: Curated Lyra bundle for Nextflow projects
+author: Francis Crick Institute
+dependencies:
+  apm:
+    - FrancisCrickInstitute/lyra/agents/nextflow/conductor.agent.md
+    - FrancisCrickInstitute/lyra/agents/nextflow/nextflow-subagents/code-review-subagent.agent.md
+    - FrancisCrickInstitute/lyra/agents/nextflow/nextflow-subagents/impliment-subagent.agent.md
+    - FrancisCrickInstitute/lyra/agents/nextflow/nextflow-subagents/planning-subagent.agent.md
+    - FrancisCrickInstitute/lyra/agents/nextflow/nextflow-subagents/seqera-ai-subagent.agent.md
+    - FrancisCrickInstitute/lyra/instructions/nextflow.instructions.md
+    - FrancisCrickInstitute/lyra/instructions/python.instructions.md
+    - FrancisCrickInstitute/lyra/skills/bioinformatic-tool-selection
+    - FrancisCrickInstitute/lyra/skills/nextflow-diagram-creation
+    - FrancisCrickInstitute/lyra/skills/nf-core-modules-subworkflows
+    - FrancisCrickInstitute/lyra/skills/pipeline-debugging
+  mcp: []
+scripts: {}
