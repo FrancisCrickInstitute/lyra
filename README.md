@@ -25,11 +25,21 @@ This creates a virtual environment, installs all dependencies, and drops you int
 
 ## Using as an APM Dependency
 
-Install individual files directly into another project:
+### Quick Install
+
+Install a conductor agent and all its dependencies:
 
 ```bash
-apm install FrancisCrickInstitute/lyra/instructions/python.instructions.md
+# For Nextflow projects
+apm install FrancisCrickInstitute/lyra/agents/nextflow/conductor.agent.md
+
+# For Python projects
+apm install FrancisCrickInstitute/lyra/agents/python-conductor.agent.md
 ```
+
+APM automatically installs all transitive dependencies (subagents, instructions, and skills) declared in the agent's frontmatter.
+
+### Project Configuration
 
 Or declare in your project's `apm.yml`:
 
@@ -38,18 +48,32 @@ name: my-project
 version: 0.0.0
 dependencies:
   apm:
-  # Agents
-  - FrancisCrickInstitute/lyra/agents/docs-updater-subagent.agent.md
-  - FrancisCrickInstitute/lyra/agents/python-conductor.agent.md
-  - FrancisCrickInstitute/lyra/agents/python-code-reviewer-subagent.agent.md
-  - FrancisCrickInstitute/lyra/agents/python-test-writer-subagent.agent.md
-  - FrancisCrickInstitute/lyra/agents/python-planner-subagent.agent.md
-  - FrancisCrickInstitute/lyra/agents/python-formatter-subagent.agent.md
-  - FrancisCrickInstitute/lyra/agents/python-code-writer-subagent.agent.md
-  # Instructions
-  - FrancisCrickInstitute/lyra/instructions/python.instructions.md
-  # Skills
-  - FrancisCrickInstitute/lyra/skills/nextflow-diagram-creation/SKILL.md
+    # Nextflow Conductor (includes all subagents, instructions, and skills)
+    - FrancisCrickInstitute/lyra/agents/nextflow/conductor.agent.md
+    
+    # Or Python Conductor (includes all subagents and instructions)
+    # - FrancisCrickInstitute/lyra/agents/python-conductor.agent.md
+```
+
+Then run:
+```bash
+apm install
+```
+
+### Install Individual Components
+
+You can also install specific components:
+
+```bash
+# Just an instruction file
+apm install FrancisCrickInstitute/lyra/instructions/python.instructions.md
+
+# Just a skill
+apm install FrancisCrickInstitute/lyra/skills/nextflow-diagram-creation
+
+# Specific subagent
+apm install FrancisCrickInstitute/lyra/agents/nextflow/nextflow-subagents/planning-subagent.agent.md
+apm install FrancisCrickInstitute/lyra/agents/python-planner-subagent.agent.md
 ```
 
 ### Troubleshooting: "not accessible or doesn't exist"
