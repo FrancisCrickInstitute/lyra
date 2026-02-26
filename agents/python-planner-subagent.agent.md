@@ -1,5 +1,4 @@
 ---
-name: python-planner-subagent
 description: Architecture & Design Reviewer - Analyzes requirements and proposes design before implementation
 model: Claude Sonnet 4.6 (copilot)
 tools: [read, search, web, todo]
