@@ -9,7 +9,7 @@ agents:
   - python-code-writer-subagent
   - python-formatter-subagent
   - python-code-reviewer-subagent
-  - docs-updater-subagent
+  - python-docs-updater-subagent
 
 ---
 
@@ -118,12 +118,12 @@ Each subagent contains its own detailed responsibilities and instructions. You o
 
 ## Stage 6: Docs Updater Agent
 
-**Task**: Delegate to subagent `docs-updater-subagent` to verify all documentation is complete.
+**Task**: Delegate to subagent `python-docs-updater-subagent` to verify all documentation is complete.
 
 **Gate Condition**: Documentation verified complete.
 
 **Your Actions**:
-1. Delegate to subagent `docs-updater-subagent`
+1. Delegate to subagent `python-docs-updater-subagent`
 2. Provide implementation and any modified files
 3. Once gate satisfied, workflow is complete
 
