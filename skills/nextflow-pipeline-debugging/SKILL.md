@@ -1,5 +1,5 @@
 ---
-name: pipeline-debugging
+name: nextflow-pipeline-debugging
 description: Guide for analyzing pipeline output and debugging Nextflow workflows. Use this when you need to inspect channel contents, trace process execution, or analyze intermediate files.
 ---
 

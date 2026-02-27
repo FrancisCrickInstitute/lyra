@@ -1,8 +1,9 @@
 ---
 description: Interact with Seqera AI CLI to get code recommendations
+name: nextflow-seqera-ai-subagent
 argument-hint: Brief description of what to analyze
 tools: ['read', 'search', 'execute']
-model: Claude Sonnet 4.5 (copilot)
+model: Claude Sonnet 4.6 (copilot)
 user-invokable: true
 ---
 You are a SEQERA AI SUBAGENT that interacts with the Seqera AI CLI tool to get code analysis and recommendations.
