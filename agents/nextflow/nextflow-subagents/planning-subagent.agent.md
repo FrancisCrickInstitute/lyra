@@ -2,7 +2,7 @@
 description: Research context and return findings to parent agent
 argument-hint: Research goal or problem statement
 tools: ['read', 'search', 'web', 'todo', 'execute/testFailure']
-model: Claude Sonnet 4.5 (copilot)
+model: Claude Sonnet 4.6 (copilot)
 user-invokable: false
 ---
 You are a PLANNING SUBAGENT called by a parent CONDUCTOR agent.

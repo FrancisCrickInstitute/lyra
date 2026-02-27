@@ -1,7 +1,7 @@
 ---
 description: 'Orchestrates Planning, Implementation, and Review cycle for complex tasks'
 tools: ['vscode', 'execute', 'read', 'agent', 'edit', 'search', 'web', 'todo']
-model: Claude Sonnet 4.5 (copilot)
+model: Claude Sonnet 4.6 (copilot)
 agents:
   - planning-subagent
   - impliment-subagent
