@@ -14,6 +14,6 @@ dependencies:
     - FrancisCrickInstitute/lyra/skills/bioinformatic-tool-selection
     - FrancisCrickInstitute/lyra/skills/nextflow-diagram-creation
     - FrancisCrickInstitute/lyra/skills/nf-core-modules-subworkflows
-    - FrancisCrickInstitute/lyra/skills/pipeline-debugging
+    - FrancisCrickInstitute/lyra/skills/nextflow-pipeline-debugging
   mcp: []
 scripts: {}

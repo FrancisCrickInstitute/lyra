@@ -1,5 +1,7 @@
 ---
+
 description: 'Review code changes from a completed implementation phase.'
+name: nextflow-code-review-subagent
 tools: ['search', 'read']
 model: Claude Sonnet 4.6 (copilot)
 user-invokable: false

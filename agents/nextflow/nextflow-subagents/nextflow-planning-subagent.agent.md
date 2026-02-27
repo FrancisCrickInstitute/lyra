@@ -1,5 +1,6 @@
 ---
 description: Research context and return findings to parent agent
+name: nextflow-planning-subagent
 argument-hint: Research goal or problem statement
 tools: ['read', 'search', 'web', 'todo', 'execute/testFailure']
 model: Claude Sonnet 4.6 (copilot)
