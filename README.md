@@ -105,10 +105,3 @@ echo 'export GITHUB_APM_PAT=$(gh auth token)' >> ~/.zshrc
 ```
 
 This raises the rate limit to 5,000 requests/hour.
-
-## Requirements
-
-- Python >= 3.13
-- [uv](https://github.com/astral-sh/uv)
-- [just](https://github.com/casey/just)
-- [apm-cli](https://github.com/microsoft/apm)
