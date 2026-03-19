@@ -5,10 +5,10 @@ author: Francis Crick Institute
 dependencies:
   apm:
     - FrancisCrickInstitute/lyra/agents/nextflow/conductor.agent.md
-    - FrancisCrickInstitute/lyra/agents/nextflow/nextflow-subagents/code-review-subagent.agent.md
-    - FrancisCrickInstitute/lyra/agents/nextflow/nextflow-subagents/impliment-subagent.agent.md
-    - FrancisCrickInstitute/lyra/agents/nextflow/nextflow-subagents/planning-subagent.agent.md
-    - FrancisCrickInstitute/lyra/agents/nextflow/nextflow-subagents/seqera-ai-subagent.agent.md
+    - FrancisCrickInstitute/lyra/agents/nextflow/nextflow-subagents/nextflow-code-review-subagent.agent.md
+    - FrancisCrickInstitute/lyra/agents/nextflow/nextflow-subagents/nextflow-impliment-subagent.agent.md
+    - FrancisCrickInstitute/lyra/agents/nextflow/nextflow-subagents/nextflow-planning-subagent.agent.md
+    - FrancisCrickInstitute/lyra/agents/nextflow/nextflow-subagents/nextflow-seqera-ai-subagent.agent.md
     - FrancisCrickInstitute/lyra/instructions/nextflow.instructions.md
     - FrancisCrickInstitute/lyra/instructions/python.instructions.md
     - FrancisCrickInstitute/lyra/skills/bioinformatic-tool-selection
