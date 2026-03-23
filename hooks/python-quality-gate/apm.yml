@@ -1,0 +1,8 @@
+name: lyra-python-quality-gate
+version: 1.0.0
+description: Python quality gate hook for Lyra
+author: Francis Crick Institute
+dependencies:
+  apm: []
+  mcp: []
+scripts: {}
