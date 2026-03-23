@@ -27,14 +27,14 @@ This creates a virtual environment, installs all dependencies, and drops you int
 
 ### Quick Install
 
-Install a conductor agent and all its dependencies:
+Install a conductor agent:
 
 ```bash
 # For Nextflow projects
 apm install FrancisCrickInstitute/lyra/agents/nextflow/conductor.agent.md
 
 # For Python projects
-apm install FrancisCrickInstitute/lyra/agents/python/python-conductor.agent.md
+apm install FrancisCrickInstitute/lyra/agents/python/python-focused-conductor.agent.md
 ```
 
 
@@ -44,10 +44,12 @@ Or install a curated bundle as a single dependency path:
 # Nextflow bundle (conductor + subagents/skills)
 apm install FrancisCrickInstitute/lyra/packages/nextflow
 apm install
+apm compile
 
 # Python bundle (conductor + subagents)
 apm install FrancisCrickInstitute/lyra/packages/python
 apm install
+apm compile
 ```
 
 The Python bundle also installs a GitHub Copilot post-edit hook that runs `ruff check`
@@ -55,6 +57,13 @@ against changed Python files and `pytest` for the project after Python code chan
 The hook will use `.venv` executables when present, otherwise it falls back to `uv run`
 or tools available on `PATH`. The hook is packaged separately under `hooks/` and
 included in the bundle via `packages/python/apm.yml`.
+
+### APM Version Requirements
+
+Use a recent APM release if you want to consume all primitives in this repository:
+
+- Hooks require APM `>= 0.7.4`.
+- `.github/instructions` support requires APM `>= 0.7.5`.
 
 ### Project Configuration
 
