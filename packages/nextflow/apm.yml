@@ -4,7 +4,7 @@ description: Curated Lyra bundle for Nextflow projects
 author: Francis Crick Institute
 dependencies:
   apm:
-    - FrancisCrickInstitute/lyra/agents/nextflow/conductor.agent.md
+    - FrancisCrickInstitute/lyra/agents/nextflow/nextflow-conductor.agent.md
     - FrancisCrickInstitute/lyra/agents/nextflow/nextflow-subagents/nextflow-code-review-subagent.agent.md
     - FrancisCrickInstitute/lyra/agents/nextflow/nextflow-subagents/nextflow-impliment-subagent.agent.md
     - FrancisCrickInstitute/lyra/agents/nextflow/nextflow-subagents/nextflow-planning-subagent.agent.md
