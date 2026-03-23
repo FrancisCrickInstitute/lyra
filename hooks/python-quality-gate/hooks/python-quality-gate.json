@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "hooks": {
+    "postToolUse": [
+      {
+        "type": "command",
+        "bash": "python3 ./python-quality-gate.py",
+        "powershell": "py -3 ./python-quality-gate.py",
+        "timeoutSec": 180
+      }
+    ]
+  }
+}
