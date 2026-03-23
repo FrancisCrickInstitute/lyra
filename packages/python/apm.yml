@@ -12,8 +12,7 @@ dependencies:
     - FrancisCrickInstitute/lyra/agents/python/python-subagents/python-code-reviewer-subagent.agent.md
     - FrancisCrickInstitute/lyra/agents/python/python-subagents/python-docs-updater-subagent.agent.md
     - FrancisCrickInstitute/lyra/instructions/python.instructions.md
-    - FrancisCrickInstitute/lyra/hooks/python-quality-gate/python-quality-gate.json
-    - FrancisCrickInstitute/lyra/hooks/python-quality-gate/python-quality-gate.py
-    
+    - FrancisCrickInstitute/lyra/hooks/python-quality-gate
+
   mcp: []
 scripts: {}
