@@ -50,6 +50,12 @@ apm install FrancisCrickInstitute/lyra/packages/python
 apm install
 ```
 
+The Python bundle also installs a GitHub Copilot post-edit hook that runs `ruff check`
+against changed Python files and `pytest` for the project after Python code changes.
+The hook will use `.venv` executables when present, otherwise it falls back to `uv run`
+or tools available on `PATH`. The hook is packaged separately under `hooks/` and
+included in the bundle via `packages/python/apm.yml`.
+
 ### Project Configuration
 
 Or declare in your project's `apm.yml`:
