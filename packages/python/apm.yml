@@ -4,7 +4,7 @@ description: Curated Lyra bundle for Python projects
 author: Francis Crick Institute
 dependencies:
   apm:
-    - FrancisCrickInstitute/lyra/agents/python/python-conductor.agent.md
+    - FrancisCrickInstitute/lyra/agents/python/python-focused-conductor.agent.md
     - FrancisCrickInstitute/lyra/agents/python/python-subagents/python-planner-subagent.agent.md
     - FrancisCrickInstitute/lyra/agents/python/python-subagents/python-test-writer-subagent.agent.md
     - FrancisCrickInstitute/lyra/agents/python/python-subagents/python-code-writer-subagent.agent.md
