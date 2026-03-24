@@ -1,0 +1,12 @@
+name: lyra-airflow-bundle
+version: 1.0.0
+description: Curated Lyra bundle for Apache Airflow 3 projects
+author: Francis Crick Institute
+dependencies:
+  apm:
+    - FrancisCrickInstitute/lyra/instructions/airflow.instructions.md
+    - FrancisCrickInstitute/lyra/skills/airflow-debugging-dags
+    - FrancisCrickInstitute/lyra/skills/airflow-testing-dags
+    - FrancisCrickInstitute/lyra/skills/airflow-writing-dags
+  mcp: []
+scripts: {}
