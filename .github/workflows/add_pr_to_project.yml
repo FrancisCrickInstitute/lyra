@@ -25,6 +25,7 @@ jobs:
                   id
                   fields(first:20) {
                     nodes {
+                      __typename
                       ... on ProjectV2Field {
                         id
                         name
@@ -43,9 +44,18 @@ jobs:
               }
             }' -f org=$ORGANIZATION -F number=$PROJECT_NUMBER > project_data.json
 
-          echo 'PROJECT_ID='$(jq '.data.organization.projectV2.id' project_data.json) >> $GITHUB_ENV
-          echo 'STATUS_FIELD_ID='$(jq '.data.organization.projectV2.fields.nodes[] | select(.name== "Status") | .id' project_data.json) >> $GITHUB_ENV
-          echo 'PR_REVIEWS_OPTION_ID='$(jq '.data.organization.projectV2.fields.nodes[] | select(.name== "Status") | .options[] | select(.name=="PR Reviews") |.id' project_data.json) >> $GITHUB_ENV
+          project_id="$(jq -r '.data.organization.projectV2.id' project_data.json)"
+          status_field_id="$(jq -r '.data.organization.projectV2.fields.nodes[] | select(.__typename=="ProjectV2SingleSelectField" and .name=="Status") | .id' project_data.json)"
+          pr_reviews_option_id="$(jq -r '.data.organization.projectV2.fields.nodes[] | select(.__typename=="ProjectV2SingleSelectField" and .name=="Status") | .options[] | select(.name=="PR Reviews") | .id' project_data.json)"
+
+          if [[ -z "$project_id" || -z "$status_field_id" || -z "$pr_reviews_option_id" ]]; then
+            echo "Failed to resolve project field IDs. Ensure the project has a single-select Status field with an option named 'PR Reviews'."
+            exit 1
+          fi
+
+          echo "PROJECT_ID=$project_id" >> $GITHUB_ENV
+          echo "STATUS_FIELD_ID=$status_field_id" >> $GITHUB_ENV
+          echo "PR_REVIEWS_OPTION_ID=$pr_reviews_option_id" >> $GITHUB_ENV
 
 # Sets environment variables for this step. Replace `YOUR_TOKEN` with the name of the secret that contains your personal access token.
       - name: Add PR to project
