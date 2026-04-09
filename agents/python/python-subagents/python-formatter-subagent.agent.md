@@ -19,7 +19,7 @@ Your job is to run automated formatting and linting tools to ensure code follows
 
 1. **Run Code Formatter (black)**
    ```bash
-   black polaris/ tests/
+   black .
    ```
    - Formats Python code to consistent style
    - Automatically fixes indentation, spacing, line length
@@ -27,7 +27,7 @@ Your job is to run automated formatting and linting tools to ensure code follows
 
 2. **Run Import Organizer (isort)**
    ```bash
-   isort polaris/ tests/
+   isort .
    ```
    - Organizes imports consistently
    - Groups: standard library, third-party, local
@@ -35,7 +35,7 @@ Your job is to run automated formatting and linting tools to ensure code follows
 
 3. **Run Linter (ruff)**
    ```bash
-   ruff check polaris/ tests/
+   ruff check .
    ```
    - Checks for code quality issues
    - Identifies unused imports
@@ -74,4 +74,3 @@ Your job is to run automated formatting and linting tools to ensure code follows
 - Tests must still pass after formatting
 - Never skip any of these three tools
 - Order matters: black, then isort, then ruff
-

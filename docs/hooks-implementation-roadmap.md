@@ -1,16 +1,18 @@
 # Hook Implementation Roadmap
 
 **Date**: March 23, 2026  
-**Status**: Recommended Actions (Not yet implemented)  
-**Priority**: Fix template leakage before downstream-facing hooks
+**Status**: Partially implemented  
+**Priority**: Finish template-sanity prevention after template leakage cleanup
 
 ---
 
 ## Executive Summary
 
-This repo packages Python and Nextflow as "reusable" bundles positioned for downstream consumers. However, audit reveals **critical template leakage**: agent logic and instructions hardcode specific project names (`polaris`, `sequencing-demux`) rather than using placeholders, making bundles non-portable without user edits.
+This repo packages Python and Nextflow as "reusable" bundles positioned for downstream consumers. Audit identified **critical template leakage**: some agent logic and instructions hardcoded specific project names (`polaris`, `sequencing-demux`) rather than using placeholders or project-generic wording, making bundles non-portable without user edits.
 
 **Key Finding**: The most valuable hook is not a workflow-enforcement hook, but a **template-sanity checker** that prevents this leakage from recurring.
+
+**Current State**: Python bundle references to `polaris` have been removed from reusable agents and instructions. Remaining template-generalization work is concentrated in the Nextflow bundle, plus adding an automated template-sanity hook so the issue does not reappear.
 
 ---
 
@@ -24,7 +26,7 @@ A **template-sanity hook** is a preventive mechanism that scans reusable package
 
 #### Problem It Solves
 
-When someone (including future maintainers) edits `agents/python/python-conductor.agent.md` or `instructions/python.instructions.md`, they might accidentally write:
+When someone (including future maintainers) edits `agents/python/python-focused-conductor.agent.md` or `instructions/python.instructions.md`, they might accidentally write:
 
 ```markdown
 # Instead of generic:
@@ -38,25 +40,25 @@ This error propagates to **every downstream consumer** who installs the bundle. 
 
 #### Scope of Existing Leakage
 
-**Python agents hardcode "polaris":**
-- `agents/python/python-conductor.agent.md`: Lines 18, 77, 94-96 (repo description, coverage checks, tool commands)
-- `agents/python/python-subagents/python-code-writer-subagent.agent.md`: Lines 48, 78, 94, 104 (API paths, coverage criteria)
-- `agents/python/python-subagents/python-formatter-subagent.agent.md`: Lines 22, 30, 38 (black/isort/ruff commands)
+**Python agents previously hardcoded "polaris" (now fixed):**
+- `agents/python/python-focused-conductor.agent.md`: coverage checks
+- `agents/python/python-subagents/python-code-writer-subagent.agent.md`: coverage criteria
+- `agents/python/python-subagents/python-formatter-subagent.agent.md`: black/isort/ruff commands
 
 **Nextflow agents hardcode "sequencing-demux":**
 - `agents/nextflow/nextflow-subagents/nextflow-planning-subagent.agent.md`: Line 29 (work-type classification logic)
 - `agents/nextflow/nextflow-subagents/nextflow-impliment-subagent.agent.md`: Line 22 (architecture assumptions)
 
 **Instructions mix approaches inconsistently:**
-- `instructions/python.instructions.md`: Lines 27, 246, 328, 330-331, 333 (uses both `<project_name>` placeholder AND hardcoded paths)
-- `instructions/nextflow.instructions.md`: Lines 5, 7, 27 (hardcodes "sequencing-demux" in title, description, examples)
+- `instructions/python.instructions.md`: genericized, but still uses `<project_name>` placeholder examples alongside project-generic command wording
+- `instructions/nextflow.instructions.md`: hardcodes "sequencing-demux" in title, description, and examples
 
 ### How Template-Sanity Works
 
 A template-sanity hook would:
 
 1. **Scan** agent and instruction files in `agents/*/` and `instructions/` for patterns:
-   - Hardcoded `polaris` references
+   - Hardcoded project-specific references in reusable bundles
    - Hardcoded `sequencing-demux` references
    - Unresolved `<project_name>` placeholders
    - Unresolved `<package_name>` placeholders
@@ -113,9 +115,9 @@ A template-sanity hook would:
 
 ```
 Phase 1: Template Fix & Prevention (Week 1)
-├── 1a. Remove "polaris" from Python agents (3 files, 12 instances)
+├── 1a. Remove "polaris" from Python agents (completed)
 ├── 1b. Remove "sequencing-demux" from Nextflow agents (2 files, 2 instances)
-├── 1c. Standardize <project_name>/<pipeline_name> in instructions (2 files, 9 instances)
+├── 1c. Standardize <project_name>/<pipeline_name> in instructions (Python completed; Nextflow pending)
 └── 1d. Create + integrate template-sanity hook
 
 Phase 2: Workflow Standardization (Week 2)
@@ -192,10 +194,10 @@ Audit of agents and instructions revealed 8 recurring patterns:
 
 ## Decision Checklist
 
-Before implementing Phase 1 (Template Fix), confirm:
+Before finishing Phase 1 (Template Fix), confirm:
 
 - [ ] User agrees that templates should be generic (no hardcoded project names)
-- [ ] Python agents should use `<project_name>` or `<package_name>` placeholders
+- [x] Python agents use project-generic wording rather than hardcoded package names
 - [ ] Nextflow agents should use `<pipeline_name>` or equivalent placeholders
 - [ ] Instructions should consistently note these are templates that require customization
 
