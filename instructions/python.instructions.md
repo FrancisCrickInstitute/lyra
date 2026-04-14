@@ -318,19 +318,19 @@ source .venv/bin/activate && <COMMAND>
 - Focus on testing business logic and edge cases
 - Don't test trivial getters/setters
 - Don't test third-party library code
-- Use `pytest --cov=src --cov-report=html` to generate coverage reports
+- Use `pytest` with coverage enabled for your primary Python package and `--cov-report=html` to generate coverage reports
 
 ## Code Quality
 
 ### Pre-commit Checklist
 Before committing code, ensure:
 1. **Tests pass**: Run `pytest`
-2. **Type checking**: Run `mypy <project_name>/` (if configured)
+2. **Type checking**: Run `mypy` against your primary Python package directory (if configured)
 3. **Format code**: 
-   - `black `<project_name>/ tests/` for code formatting
-   - `isort <project_name>/ tests/` for import sorting
+   - `black .` for code formatting
+   - `isort .` for import sorting
 4. **Lint**: Run `ruff check .`
-5. **Additional linting**: Run `pylint <project_name>/` for deeper static analysis
+5. **Additional linting**: Run `pylint` against your primary Python package directory for deeper static analysis
 6. **Coverage**: Aim for >80% test coverage on new code
 
 ### Tool Configuration

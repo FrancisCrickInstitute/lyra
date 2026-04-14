@@ -89,7 +89,7 @@ Work through **each sub-task** from the `sub_tasks` list in order:
 **Step B — Write Implementation (green phase)**:
 1. Invoke `python-code-writer-subagent` with: `design_proposal`, the current `sub_task`, `test_file_paths`, and the specific failing test output.
 2. Run `pytest` to check test results.
-3. Run `pytest --cov=polaris` to check coverage.
+3. Run `pytest` with coverage enabled for the project's primary Python package to check coverage.
 4. If any tests fail or coverage is below 100% for the new code:
    - Re-invoke `python-code-writer-subagent` with the specific failures and coverage gaps.
    - Repeat until all tests pass and coverage is 100%.
@@ -99,7 +99,7 @@ Work through **each sub-task** from the `sub_tasks` list in order:
 - **If a GitHub issue was provided**: Post a progress comment noting all sub-tasks are implemented and tests pass, and that code review is starting.
 - Proceed to Stage 3 with the full `impl_files` and `test_files` lists.
 
-**Gate condition**: Every sub-task has passing tests and 100% coverage for all new code. `pytest --cov=polaris` confirms this.
+**Gate condition**: Every sub-task has passing tests and 100% coverage for all new code. A coverage-enabled `pytest` run against the project's primary Python package confirms this.
 
 ---
 
@@ -119,7 +119,7 @@ Work through **each sub-task** from the `sub_tasks` list in order:
    - **If a GitHub issue was provided**: Post a comment with the review results — verdict (Rejected), the list of Blocker issues found (file + line + description per item), and any Advisory issues.
    - Track the round count. If this is the **3rd or more rejection round for the same category of issue**, treat remaining issues as Advisory and proceed to Stage 4 anyway. Post a note to the issue about the remaining advisories.
    - Re-invoke `python-code-writer-subagent` with the `design_proposal`, the **complete** `review_issues` list (file + line + fix-suggestion per item — all issues at once, not one at a time), and the `impl_files` to modify.
-   - Run `pytest --cov=polaris` to confirm all tests still pass at 100% coverage after fixes.
+   - Run `pytest` with coverage enabled for the project's primary Python package to confirm all tests still pass at 100% coverage after fixes.
    - Re-invoke `python-code-reviewer-subagent` with the updated files. After each re-review, post a comment with the updated results. Repeat until approved.
 4. **Once approved** (no Blockers; Advisory issues may remain):
    - Proceed to Stage 4.
