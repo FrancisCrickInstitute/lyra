@@ -106,6 +106,7 @@ Always load `nextflow.instructions.md` for `.nf` and config files. Load `python.
 - nf-tests without snapshot assertions or using hardcoded output paths
 - Unquoted variables in shell script blocks (shell injection risk)
 - Python code missing type hints, docstrings, or tests
+- Use of deprecated implicit `it` variable in closures (use explicit named params: `{ meta, bam -> ... }`)
 
 **✓ Good Signs:**
 - Consistent use of `meta` tuple and `task.ext.*` conventions
