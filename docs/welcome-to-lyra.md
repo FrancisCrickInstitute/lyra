@@ -36,6 +36,16 @@ The conductor will:
 
 You stay in the loop at the approval stage, but the busy work is handled for you.
 
+#### Standalone Agents
+
+Some agents are designed to be used directly, not through a conductor. The **scoping agent** is an example: you interact with it yourself to plan a project before any implementation begins.
+
+| Agent | What it does |
+|---|---|
+| `scope-project-agent` | Turns a rough idea into a versioned plan with design proposal, task breakdown, and optional issue tracker publishing |
+
+See [Using the Scope Project Agent](using-the-scoping-agent.md) for a full walkthrough.
+
 #### Subagents
 
 Subagents are specialists. Each one does exactly one thing well. You don't invoke them directly — the conductor calls them in the right sequence.
@@ -136,6 +146,82 @@ Hooks are transparent to you. You ask the agent to do something, it does it, the
 | Hook | What it does |
 |---|---|
 | `python-quality-gate` | Runs `ruff check` and `pytest` after every Python file change |
+
+---
+
+## Starting a New Project — End-to-End
+
+This is the recommended flow when you have an idea but haven't started building yet.
+
+### Step 1: Install the scoping agent
+
+```bash
+apm install FrancisCrickInstitute/lyra/agents/scoping
+apm install
+apm compile
+```
+
+### Step 2: Open Copilot Chat and invoke the agent
+
+```
+@scope-project-agent I want to build a pipeline that ingests raw FASTQ files,
+runs FastQC, trims adapters with Trim Galore, and outputs a MultiQC report.
+The project lives at github.com/FrancisCrickInstitute/qc-pipeline.
+```
+
+The agent reads any linked docs, searches for anything it doesn't recognise, and states its assumptions.
+
+### Step 3: Review and approve the design proposal
+
+The agent presents a structured design — scope, architecture, key decisions, risks. Read it, ask questions, request changes. When you're happy:
+
+```
+Approved. Continue to task breakdown.
+```
+
+### Step 4: Review and approve the task breakdown
+
+The agent produces a table of tasks with complexity estimates and dependency ordering. Adjust anything that doesn't look right, then approve:
+
+```
+Looks good. Save the plan.
+```
+
+### Step 5: The plan is saved
+
+The agent writes `plans/qc-pipeline.md` — a versioned document with your approved design, task list, milestones, and an open questions table. This is now your source of truth.
+
+### Step 6: Install the right implementation bundle
+
+With a plan in hand, install the bundle that matches your stack:
+
+```bash
+apm install FrancisCrickInstitute/lyra/packages/nextflow
+apm install
+apm compile
+```
+
+### Step 7: Start building
+
+Open Copilot Chat, select the conductor for your stack, and hand it the first task from your plan:
+
+```
+@nextflow-conductor Implement task 1 from plans/qc-pipeline.md:
+add a FastQC subworkflow that takes a channel of FASTQ pairs and emits QC reports.
+```
+
+The conductor orchestrates planning, implementation, review, and testing. You approve the plan before any code is written.
+
+### Step 8 (optional): Publish tasks as tickets
+
+Return to the scoping agent to create issues from your plan:
+
+```
+@scope-project-agent Create GitHub Issues for all tasks in plans/qc-pipeline.md
+in FrancisCrickInstitute/qc-pipeline.
+```
+
+The agent confirms the target repo and scope, then creates one ticket per task with structured bodies and links back to the plan.
 
 ---
 
