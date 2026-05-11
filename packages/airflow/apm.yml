@@ -8,5 +8,7 @@ dependencies:
     - FrancisCrickInstitute/lyra/skills/airflow-debugging-dags
     - FrancisCrickInstitute/lyra/skills/airflow-testing-dags
     - FrancisCrickInstitute/lyra/skills/airflow-writing-dags
+    - github/awesome-copilot/skills/commit-message-storyteller
+    - github/awesome-copilot/skills/git-flow-branch-creator
   mcp: []
 scripts: {}

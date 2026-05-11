@@ -15,5 +15,7 @@ dependencies:
     - FrancisCrickInstitute/lyra/skills/nextflow-diagram-creation
     - FrancisCrickInstitute/lyra/skills/nf-core-modules-subworkflows
     - FrancisCrickInstitute/lyra/skills/nextflow-pipeline-debugging
+    - github/awesome-copilot/skills/commit-message-storyteller
+    - github/awesome-copilot/skills/git-flow-branch-creator
   mcp: []
 scripts: {}
