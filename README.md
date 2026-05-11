@@ -2,6 +2,8 @@
 
 Agentic primitives repository. Provides reusable agents, instructions, prompts, and skills for AI-assisted development workflows, managed via the [Microsoft Agentic Package Manager (APM)](https://github.com/microsoft/apm).
 
+> New to agents? [Read our intro before diving in](docs/welcome-to-lyra.md)
+
 ## Contents
 
 The `.apm/` directory contains the following primitive types:

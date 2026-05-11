@@ -41,12 +41,12 @@ Your job is to write code that makes all tests pass with 100% coverage, followin
 
 3. **Verify Coverage and Final Test Pass**
    - Run: `pytest` to verify all tests pass
-   - Run: `pytest --cov=polaris` to verify coverage
+   - Run: `pytest` with coverage enabled for the project's primary Python package to verify coverage
 
 ## Success Criteria
 
 ✓ All tests PASS
-✓ 100% test coverage confirmed (`pytest --cov=polaris`)
+✓ 100% test coverage confirmed with a coverage-enabled `pytest` run against the project's primary Python package
 ✓ Code follows all style conventions
 ✓ All function signatures have type hints
 ✓ All public functions/classes have docstrings
