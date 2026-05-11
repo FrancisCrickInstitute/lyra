@@ -14,6 +14,8 @@ dependencies:
     - FrancisCrickInstitute/lyra/agents/python/python-subagents/python-plan-reviewer-subagent.agent.md
     - FrancisCrickInstitute/lyra/instructions/python.instructions.md
     - FrancisCrickInstitute/lyra/hooks/python-quality-gate
+    - github/awesome-copilot/skills/commit-message-storyteller
+    - github/awesome-copilot/skills/git-flow-branch-creator
 
   mcp: []
 scripts: {}

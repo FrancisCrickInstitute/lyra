@@ -1,6 +1,7 @@
 # Hook Implementation Roadmap
 
 **Date**: March 23, 2026  
+**Amended**: May 11, 2026 — see "Externalised Tooling" section below; Phase 2 scope shrunk after bundling `awesome-copilot` skills.  
 **Status**: Partially implemented  
 **Priority**: Finish template-sanity prevention after template leakage cleanup
 
@@ -93,7 +94,7 @@ A template-sanity hook would:
 
 | Hook | Purpose | Effort | Impact | Dependencies |
 |-------|---------|--------|--------|--------------|
-| **commit-message-validator** | Enforce Conventional Commits format (`type(scope): subject`) | Low (100 LOC regex) | Catches changelog-breaking commits before PR; improves feedback loop | None (can run immediately) |
+| **commit-message-validator** | Enforce Conventional Commits format (`type(scope): subject`) | Low (~50 LOC regex; scope reduced — see "Externalised Tooling" below) | Catches changelog-breaking commits before PR; improves feedback loop | Pairs with bundled `commit-message-storyteller` skill (authoring) — this hook is the enforcement half |
 | **debug-cleanup** (Nextflow) | Warn/fail on debug patterns (`.view()`, `println`, `DEBUG` comments) in `.nf` files | Medium (250 LOC) | Makes implicit requirement deterministic; parallels Python quality-gate | template-sanity should exist first |
 
 ### Tier 3: Quality Gates (Can Run After Templates Fixed)
@@ -146,6 +147,49 @@ These should stay as **agent-side logic** or **human discipline**, not hooks:
 
 ---
 
+## Externalised Tooling: Don't Reinvent the Wheel
+
+**Added**: May 11, 2026
+
+Phase 2 of this roadmap originally proposed building commit-message and (implicitly) branch-naming helpers from scratch. Before doing that, it is worth checking what already exists on the APM marketplace — particularly under [`github/awesome-copilot`](https://github.com/github/awesome-copilot), which is GitHub-maintained and broadly adopted.
+
+Two skills have now been bundled into every Lyra package (`airflow`, `nextflow`, `python`):
+
+| Skill | What it does | Where in this roadmap |
+|---|---|---|
+| `github/awesome-copilot/skills/commit-message-storyteller` | Conventional Commits authoring — turns a diff into a `type(scope): subject` message with optional body and footer | Replaces the **authoring** half of Tier 2's `commit-message-validator` |
+| `github/awesome-copilot/skills/git-flow-branch-creator` | Analyses changes and proposes a Git Flow branch name (`feature/...`, `release-X.Y.Z`, `hotfix-...`) | Covers a workflow concern not previously scoped in this roadmap (branch naming) |
+
+### Impact on Phase 2
+
+Adopting these skills means we **don't need to build authoring tooling**. The custom work shrinks accordingly:
+
+- **`commit-message-validator`** is now a thin format checker (subject regex + type whitelist + length cap), not an end-to-end authoring system. Estimate drops from ~100 LOC to ~50 LOC. The storyteller skill handles the "what should I write?" question; the hook only enforces the format at the pre-commit boundary.
+- **Branch naming** does not need its own hook. The `git-flow-branch-creator` skill is interactive and advisory — which is the right shape for a workflow concern that benefits from human judgement (a hook that *blocks* on branch name would be high-friction).
+
+### Why this matters as a principle
+
+The hook roadmap was scoped before the bundles had skill dependencies on third-party marketplaces. Now that we're shipping `awesome-copilot` skills, the cost-benefit shifts:
+
+- **Maintained upstream**: bug fixes and convention updates come for free
+- **Discoverable**: contributors using the bundles get these skills without extra wiring
+- **Smaller surface area for us to own**: every line of hook code we don't write is a line we don't have to maintain
+
+Before adding a new hook to this roadmap, check the APM marketplace for an existing skill that covers the *authoring* side. The hook then becomes a *validation* shim, not a full feature.
+
+### House-style caveats
+
+The two adopted skills have defaults that conflict with this repo's conventions:
+
+- **`commit-message-storyteller`** defaults to multi-line messages, but `.github/copilot-instructions.md` mandates **single-line commits only**. The skill itself documents a "keep it short" mode that omits the body — users must invoke it that way, or repo-local wrapper instructions must override the default.
+- **`git-flow-branch-creator`** assumes `master`/`develop` branches and `feature/...` prefixes. This repo uses `main`/`dev` and `feat/...`-style prefixes (Conventional Commits style, not Git Flow style).
+
+These mismatches mean the skills are **advisors, not enforcers**. The Tier 2 validator hook is still load-bearing for enforcement of *our* conventions, even with the skills installed.
+
+A follow-up worth tracking: either contribute upstream fixes (configurable branch names / commit format) or ship repo-local override instructions in `instructions/` that the bundled skills inherit from.
+
+---
+
 ## Detailed Findings
 
 ### Workflow Patterns Identified
@@ -178,7 +222,7 @@ Audit of agents and instructions revealed 8 recurring patterns:
 6. **Commit Message Standardization** (Both repos)
    - Changelog workflow parses `type(scope): subject` for version bumping
    - No pre-commit validation; relies on human discipline
-   - Hook opportunity: commit-message-validator hook
+   - Hook opportunity: commit-message-validator hook (enforcement only — authoring is now covered by the bundled `commit-message-storyteller` skill; see "Externalised Tooling" below)
 
 7. **Unsafe Tool Usage Without Enforcement** (Python has coverage; Nextflow lacks equivalent)
    - Python: pytest must run and pass before proceeding
@@ -226,6 +270,8 @@ Before implementing Phase 2 (Workflow Hooks), confirm:
 - **python-quality-gate hook** (existing): `hooks/python-quality-gate/` — runs ruff check + pytest on `.py` file changes
 - **APM Package System**: https://github.com/microsoft/apm — defines hook discovery and lifecycle
 - **Conventional Commits**: https://www.conventionalcommits.org/ — format for commit-message-validator
+- **awesome-copilot skills**: https://github.com/github/awesome-copilot — source of `commit-message-storyteller` and `git-flow-branch-creator`, now bundled in all packages
+- **Git Flow (nvie)**: https://nvie.com/posts/a-successful-git-branching-model/ — branching model `git-flow-branch-creator` follows
 - **nf-lint**: https://github.com/nextflow-io/nf-lint — Nextflow code style enforcer
 - **Python instructions**: `instructions/python.instructions.md` — PEP 8, type hints, tool standardization
 - **Nextflow instructions**: `instructions/nextflow.instructions.md` — DSL2, nf-core patterns, work-type conventions
